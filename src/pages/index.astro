@@ -1,0 +1,87 @@
+---
+import Base from "../layouts/Base.astro";
+
+const pillars = [
+  {
+    title: "We publish",
+    body: "We compile data from the public record and publish it in full, with every figure linked to the source it came from.",
+  },
+  {
+    title: "We maintain",
+    body: "Datasets go stale, move, or quietly disappear. Ours are kept current and citable, and are meant to still be here in ten years.",
+  },
+  {
+    title: "We are independent",
+    body: "No political affiliation. No commercial income. No external funding. Our method is published so anyone can check our working.",
+  },
+];
+---
+
+<Base
+  title="Public-interest data about how Australian governments perform"
+  description="APIA is an incorporated not-for-profit that collects data from the public record, publishes it in full with its sources, and keeps it accurate and available over time."
+>
+  <section class="wrap hero">
+    <h1>Public-interest data about how Australian governments perform</h1>
+    <p class="lede measure">
+      The Australian Public Interest Alliance is a not-for-profit that collects data
+      from the public record, publishes it in full with its sources, and keeps it
+      accurate and available over time.
+    </p>
+  </section>
+
+  <section class="wrap">
+    <div class="pillars">
+      {pillars.map((p) => (
+        <div>
+          <h2>{p.title}</h2>
+          <p>{p.body}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="wrap">
+    <h2 id="our-work">Our work</h2>
+    <article class="project">
+      <p class="project-head">
+        <span class="name">Too Hard Basket</span>
+        <span class="badge">Launching Q4 2026</span>
+      </p>
+      <p class="measure">
+        A public record of what happens after a parliamentary committee reports:
+        whether government responded, how long it took, and what the response
+        actually addressed.
+      </p>
+      <p class="more"><a href="/projects/">More about this project →</a></p>
+    </article>
+  </section>
+</Base>
+
+<style>
+  .hero { padding-bottom: 1rem; }
+
+  .pillars {
+    display: grid; gap: 1.75rem 3rem; margin-block: 1.5rem 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  }
+  .pillars h2 { margin-top: 0; }
+  .pillars p { color: var(--ink-secondary); font-size: 0.9375rem; margin: 0; }
+
+  .project {
+    border: 1px solid var(--rule); border-left: 3px solid var(--accent);
+    padding: 1.25rem 1.4rem; background: var(--surface-sunken);
+  }
+  .project-head {
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.75rem;
+    margin-bottom: 0.5rem;
+  }
+  .project .name { font-weight: 650; font-size: 1.0625rem; }
+  .badge {
+    font-size: 0.6875rem; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--accent); border: 1px solid var(--accent);
+    border-radius: 2px; padding: 0.05rem 0.4rem;
+  }
+  .project p:last-child { margin-bottom: 0; }
+  .more { font-size: 0.9375rem; }
+</style>

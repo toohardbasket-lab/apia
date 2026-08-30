@@ -1,0 +1,106 @@
+---
+import Base from "../layouts/Base.astro";
+
+/**
+ * Note on wording: the original copy described Too Hard Basket as recording
+ * "which recommendations were accepted, which were rejected". It does not —
+ * per-recommendation positions are the coverage build, which is not published.
+ * Claiming it here would be the exact failure the register exists to expose in
+ * others, so the description below states what the register does today, and the
+ * roadmap section states coverage as something still to come.
+ */
+const meta = [
+  ["Status", "In development, launching Q4 2026"],
+  ["Site", "toohardbasket.org.au"],
+  ["Data licence", "CC BY 4.0"],
+  ["Code licence", "MIT"],
+  ["Sources", "Every row links to its source in the official parliamentary record"],
+];
+---
+
+<Base
+  title="Projects"
+  description="What APIA publishes: the datasets, their licences, and the sources behind them."
+>
+  <section class="wrap measure">
+    <p class="eyebrow">Projects</p>
+    <h1>What we publish</h1>
+    <p class="lede">
+      APIA publishes datasets, not opinion. Each project sets out its sources and its
+      method, and the underlying data is available to anyone who wants to check it or
+      use it.
+    </p>
+    <p>
+      This page lists what APIA publishes — not every dataset within it. A single project
+      may carry many datasets; those are listed on the project’s own site.
+    </p>
+  </section>
+
+  <section class="wrap measure">
+    <article class="project">
+      <p class="project-head">
+        <span class="name">Too Hard Basket</span>
+        <span class="badge">Launching Q4 2026</span>
+      </p>
+      <p>
+        When a parliamentary committee reports, government is expected to respond. Often
+        it does. Sometimes it responds late. Sometimes it never responds at all, and
+        nothing marks the fact.
+      </p>
+      <p>
+        Too Hard Basket is a public record of what happens after the report: whether
+        government responded, how long it took, and whether the response engaged with the
+        committee’s recommendations or closed the file without answering them.
+      </p>
+      <dl class="facts">
+        {meta.map(([k, v]) => (
+          <div><dt>{k}</dt><dd>{v}</dd></div>
+        ))}
+      </dl>
+    </article>
+  </section>
+
+  <section class="wrap measure">
+    <h2>What comes next</h2>
+    <p>
+      Too Hard Basket begins with one record — Senate committee reports awaiting a
+      government response — and will extend to House of Representatives committees, to the
+      state and territory parliaments, and to related records of the same kind: questions
+      taken on notice, orders for the production of documents, statutory reviews that fall
+      due and are not done, recommendations from royal commissions and the Auditor-General,
+      and statutory deadlines that pass unmet.
+    </p>
+    <p>
+      It will also go deeper rather than only wider. Recording that a response arrived is
+      not the same as recording what it said, and the harder measure — for each
+      recommendation a committee made, did the government state a position on it? — is the
+      one that matters most. That work is under way and is not published yet. When it is,
+      this page will say so.
+    </p>
+    <p>
+      APIA’s job is to publish these and to keep publishing them. We would rather add one
+      dataset a quarter and still be here in ten years than announce twenty and maintain
+      none.
+    </p>
+  </section>
+</Base>
+
+<style>
+  .project {
+    border: 1px solid var(--rule); border-left: 3px solid var(--accent);
+    padding: 1.25rem 1.4rem; background: var(--surface-sunken);
+    margin-bottom: 1rem;
+  }
+  .project-head {
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.75rem;
+    margin-bottom: 0.6rem;
+  }
+  .project .name { font-weight: 650; font-size: 1.0625rem; }
+  .badge {
+    font-size: 0.6875rem; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--accent); border: 1px solid var(--accent);
+    border-radius: 2px; padding: 0.05rem 0.4rem;
+  }
+  .project dl.facts { margin-bottom: 0; }
+  .project dl.facts > div:last-child { border-bottom: 0; padding-bottom: 0; }
+</style>

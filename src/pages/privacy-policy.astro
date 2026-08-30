@@ -1,0 +1,47 @@
+---
+import Base from "../layouts/Base.astro";
+
+/**
+ * Every claim on this page is a claim about how the site is built, so it has to
+ * stay true as the site changes. All of it survives the move to static hosting:
+ * no cookies, no analytics, no third-party embeds, no form — the site is files.
+ *
+ * The last paragraph is a commitment, not a description. If analytics, a form or
+ * an embedded service is ever added, this page changes FIRST.
+ */
+---
+
+<Base
+  title="Privacy"
+  description="What this website collects, which is nothing, and what happens to an email you send."
+>
+  <section class="wrap measure">
+    <p class="eyebrow">Legal</p>
+    <h1>Privacy</h1>
+
+    <p>
+      This website sets no cookies, runs no analytics or tracking, embeds nothing from third
+      parties, and has no contact form. Visiting it does not create a record we can identify
+      you by.
+    </p>
+    <p>
+      If you email us, we hold your message and your address for the purpose of replying and
+      for our own records. We do not use it for anything else, we do not share or sell it,
+      and we do not add you to any mailing list.
+    </p>
+    <p>
+      You may ask what personal information we hold about you, ask us to correct it, or ask
+      us to delete it, by writing to
+      {" "}<a href="mailto:info@apia.org.au">info@apia.org.au</a>.
+    </p>
+    <p>
+      The site is hosted by a third-party provider, whose servers keep standard access logs
+      including IP addresses. Those logs are held by the host under its own terms and are not
+      used by APIA.
+    </p>
+    <p>
+      If this site ever adds analytics, a form, or an embedded service, this page will be
+      updated before that happens.
+    </p>
+  </section>
+</Base>

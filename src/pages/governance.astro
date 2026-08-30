@@ -1,0 +1,103 @@
+---
+import Base from "../layouts/Base.astro";
+
+/**
+ * The page a sceptical reader actually opens. Everything on it is checkable
+ * against an external register, which is the point — the legal facts here are
+ * duplicated in toohardbasket.org.au's src/lib/about.ts, and the two must not
+ * be allowed to drift.
+ */
+const legalStatus = [
+  ["Registered name", "Australian Public Interest Alliance Incorporated"],
+  ["Registration number", "IARN A1046494Z"],
+  ["Incorporated", "26 November 2025, Western Australia"],
+  ["Legislation", "Associations Incorporation Act 2015 (WA)"],
+  ["ABN", "33 842 796 620"],
+  ["Rules", "The Model Rules for incorporated associations (WA)"],
+  ["Financial year", "Ends 30 June"],
+];
+---
+
+<Base
+  title="Governance"
+  description="APIA's legal status, who is accountable for what it publishes, how it is funded, and how corrections are handled."
+>
+  <section class="wrap measure">
+    <p class="eyebrow">Governance</p>
+    <h1>Who we are and who answers for this</h1>
+    <p class="lede">
+      If you are checking whether data published here can be relied on, this is the page
+      you want.
+    </p>
+
+    <h2>Legal status</h2>
+    <dl class="facts">
+      {legalStatus.map(([k, v]) => (
+        <div><dt>{k}</dt><dd>{v}</dd></div>
+      ))}
+    </dl>
+    <p>
+      APIA is not registered with the ACNC and is not endorsed as a deductible gift
+      recipient. Donations to APIA are not tax deductible.
+    </p>
+
+    <h2 id="accountable">Who is accountable</h2>
+    <p>
+      Alan Hewitt, President, is responsible for the data APIA publishes and answers for
+      any error in it.
+    </p>
+    <p>
+      APIA is governed by a committee of three members under the Model Rules. The full
+      committee is recorded on the public register maintained by Consumer Protection (WA),
+      which anyone may search.
+    </p>
+    <p>
+      <strong>In practice this is one person’s work.</strong> The other two committee
+      members provide the governance an incorporated association requires; they do not
+      direct APIA’s projects or review them day to day. That is worth saying plainly,
+      because “a committee of three” implies more institutional weight than exists, and a
+      reader who worked it out later would be entitled to wonder what else had been
+      oversold.
+    </p>
+    <p>
+      It also matters less than it might. Nothing APIA publishes asks you to trust the
+      organisation. Every figure is computed by published code from published data, every
+      row links to the official record it came from, and the method is published alongside
+      it — including what it cannot see. If something is wrong, it is wrong in a way you
+      can demonstrate, which is a better guarantee than a larger committee would be.
+    </p>
+
+    <h2>Funding</h2>
+    <p>
+      APIA is self-funded by its founder and has received no external funding to date.
+    </p>
+    <p>
+      If that changes, this page will say so and name the source. We would rather tell you
+      than have you find out.
+    </p>
+
+    <h2 id="corrections">Corrections</h2>
+    <p>
+      Every dataset APIA publishes carries its sources and its method, so you can check our
+      working.
+    </p>
+    <p>
+      If you find an error, write to
+      {" "}<a href="mailto:info@apia.org.au?subject=correction">info@apia.org.au</a> with
+      “correction” in the subject line. We will check it, fix it if we are wrong, and record
+      what changed — so corrections are visible rather than silent.
+    </p>
+
+    <h2>Conflicts of interest</h2>
+    <p>
+      APIA operates under the Model Rules, which govern the circumstances in which any
+      payment may be made to a committee member. Committee members declare personal
+      interests in matters before the committee, and any such payment is approved by the
+      committee and recorded in the minutes.
+    </p>
+    <p>
+      One standing disclosure is set out in full on the
+      {" "}<a href="/about/#disclosure">About page</a>.
+    </p>
+  </section>
+</Base>

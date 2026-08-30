@@ -1,0 +1,198 @@
+---
+/**
+ * The shell every page uses.
+ *
+ * Deliberately a sibling of toohardbasket.org.au rather than a copy: same
+ * neutral palette and type system so the two read as one organisation, a
+ * different accent so nobody mistakes one site for the other. APIA is the
+ * quieter of the two — it is the institutional layer, not the product — so
+ * there is no hero figure, no chart, and nothing that moves.
+ *
+ * Nav and footer live here, once. Nine pages sharing one header is the whole
+ * reason this is Astro rather than nine hand-written HTML files: the failure
+ * mode for a small site is pages quietly drifting out of step with each other.
+ */
+export interface Props {
+  title: string;
+  description: string;
+}
+const { title, description } = Astro.props;
+const year = new Date().getFullYear();
+
+const nav = [
+  { href: "/", label: "Home" },
+  { href: "/about/", label: "About" },
+  { href: "/governance/", label: "Governance" },
+  { href: "/projects/", label: "Projects" },
+  { href: "/contact/", label: "Contact" },
+];
+
+const legal = [
+  { href: "/disclaimer/", label: "Disclaimer" },
+  { href: "/privacy-policy/", label: "Privacy" },
+  { href: "/terms-of-use/", label: "Terms of Use" },
+  { href: "/acknowledgement-of-country/", label: "Acknowledgement of Country" },
+];
+
+const here = Astro.url.pathname.replace(/\/$/, "") || "/";
+const current = (href: string) => {
+  const h = href.replace(/\/$/, "") || "/";
+  return h === here ? "page" : undefined;
+};
+---
+
+<!doctype html>
+<html lang="en-AU">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title} — Australian Public Interest Alliance</title>
+    <meta name="description" content={description} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <style is:global>
+      :root {
+        color-scheme: light;
+        --surface:        #fcfcfb;
+        --surface-sunken: #f4f4f1;
+        --ink:            #0b0b0b;
+        --ink-secondary:  #52514e;
+        --ink-muted:      #78766f;
+        --rule:           #dedcd5;
+        --rule-strong:    #b9b6ad;
+        --accent:         #1f6f63;
+        --measure: 34rem;
+        --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+                "Helvetica Neue", Arial, sans-serif;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme="light"]) {
+          color-scheme: dark;
+          --surface:        #1a1a19;
+          --surface-sunken: #232322;
+          --ink:            #ffffff;
+          --ink-secondary:  #c3c2b7;
+          --ink-muted:      #98968c;
+          --rule:           #34342f;
+          --rule-strong:    #4c4c45;
+          --accent:         #4fb3a2;
+        }
+      }
+      :root[data-theme="dark"] {
+        color-scheme: dark;
+        --surface:        #1a1a19;
+        --surface-sunken: #232322;
+        --ink:            #ffffff;
+        --ink-secondary:  #c3c2b7;
+        --ink-muted:      #98968c;
+        --rule:           #34342f;
+        --rule-strong:    #4c4c45;
+        --accent:         #4fb3a2;
+      }
+
+      * { box-sizing: border-box; }
+      html { -webkit-text-size-adjust: 100%; }
+      body {
+        margin: 0;
+        background: var(--surface);
+        color: var(--ink);
+        font-family: var(--sans);
+        font-size: 1rem;
+        line-height: 1.6;
+      }
+      a { color: inherit; text-underline-offset: 0.15em; text-decoration-thickness: 1px; }
+      a:hover { text-decoration-color: var(--accent); }
+
+      .wrap { width: min(64rem, 100% - 2.5rem); margin-inline: auto; }
+      .measure { max-width: var(--measure); }
+
+      .eyebrow {
+        font-size: 0.6875rem;
+        letter-spacing: 0.11em;
+        text-transform: uppercase;
+        color: var(--ink-muted);
+        margin: 0 0 0.5rem;
+      }
+
+      header.site { border-bottom: 1px solid var(--rule); }
+      header.site .bar {
+        display: flex; flex-wrap: wrap; gap: 0.75rem 2rem;
+        align-items: baseline; justify-content: space-between;
+        padding-block: 1.1rem;
+      }
+      header.site .mark {
+        font-weight: 650; letter-spacing: -0.015em; text-decoration: none;
+      }
+      header.site .mark span { color: var(--ink-muted); font-weight: 400; }
+      header.site nav { display: flex; flex-wrap: wrap; gap: 1.4rem; font-size: 0.875rem; }
+      header.site nav a { color: var(--ink-secondary); text-decoration: none; padding-block: 0.15rem; }
+      header.site nav a[aria-current="page"] {
+        color: var(--ink); box-shadow: inset 0 -2px 0 var(--accent);
+      }
+
+      main { padding-block: 3rem 4rem; }
+      h1 {
+        font-size: clamp(1.6rem, 1.2rem + 1.6vw, 2.2rem); line-height: 1.2;
+        letter-spacing: -0.02em; margin: 0 0 0.75rem;
+      }
+      h2 { font-size: 1.125rem; letter-spacing: -0.005em; margin: 2.5rem 0 0.6rem; }
+      p { margin: 0 0 1rem; }
+      .lede { font-size: 1.0625rem; color: var(--ink-secondary); }
+
+      /* Definition-style rows: legal status, contact routes, project metadata. */
+      dl.facts { margin: 1.25rem 0; border-top: 1px solid var(--rule); }
+      dl.facts > div {
+        display: grid; gap: 0.15rem 1.5rem; padding: 0.6rem 0;
+        border-bottom: 1px solid var(--rule);
+        grid-template-columns: minmax(9rem, 14rem) 1fr;
+      }
+      @media (max-width: 34rem) {
+        dl.facts > div { grid-template-columns: 1fr; }
+      }
+      dl.facts dt { color: var(--ink-muted); font-size: 0.875rem; }
+      dl.facts dd { margin: 0; }
+
+      footer.site {
+        border-top: 1px solid var(--rule);
+        margin-top: 4rem; padding-block: 1.75rem 3rem;
+        font-size: 0.8125rem; color: var(--ink-muted);
+      }
+      footer.site p { margin: 0 0 0.6rem; }
+      footer.site nav { display: flex; flex-wrap: wrap; gap: 1.1rem; margin-bottom: 0.9rem; }
+      footer.site a { color: var(--ink-secondary); }
+
+      @media (prefers-reduced-motion: reduce) {
+        * { animation: none !important; transition: none !important; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site">
+      <div class="wrap bar">
+        <a class="mark" href="/">
+          Australian Public Interest Alliance <span>· apia.org.au</span>
+        </a>
+        <nav aria-label="Primary">
+          {nav.map((n) => <a href={n.href} aria-current={current(n.href)}>{n.label}</a>)}
+        </nav>
+      </div>
+    </header>
+
+    <main><slot /></main>
+
+    <footer class="site">
+      <div class="wrap">
+        <nav aria-label="Legal">
+          {legal.map((n) => <a href={n.href}>{n.label}</a>)}
+        </nav>
+        <p>
+          Australian Public Interest Alliance Incorporated · ABN 33 842 796 620 ·
+          incorporated association registered in Western Australia.
+        </p>
+        <p>
+          <a href="mailto:info@apia.org.au">info@apia.org.au</a> ·
+          © {year}
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

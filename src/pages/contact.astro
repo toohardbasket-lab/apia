@@ -1,0 +1,61 @@
+---
+import Base from "../layouts/Base.astro";
+
+/**
+ * Plain addresses, no form. That is deliberate and it is also what lets this
+ * site be pure static files: nothing here accepts input, so there is nothing
+ * to exploit and nothing to keep patched.
+ *
+ * No postal address, by decision (Alan, 30 Aug 2026). A registered office is
+ * expected of a WA incorporated association and its absence is a known
+ * weakness, accepted deliberately rather than overlooked. The association's
+ * registered address is on the Consumer Protection (WA) register for anyone
+ * who needs it. Do not re-raise this as an oversight, and do not invent one.
+ */
+const identity = [
+  ["Registered name", "Australian Public Interest Alliance Incorporated"],
+  ["ABN", "33 842 796 620"],
+  ["Registration number", "IARN A1046494Z"],
+];
+---
+
+<Base
+  title="Contact"
+  description="How to reach APIA for general enquiries, corrections to published data, and media."
+>
+  <section class="wrap measure">
+    <p class="eyebrow">Contact</p>
+    <h1>Get in touch</h1>
+
+    <h2>General enquiries</h2>
+    <p><a href="mailto:info@apia.org.au">info@apia.org.au</a></p>
+
+    <h2 id="corrections">Corrections and data errors</h2>
+    <p>
+      <a href="mailto:info@apia.org.au?subject=correction">info@apia.org.au</a>, with
+      “correction” in the subject line. Please include a link to the page and, if you can,
+      the source you think we have got wrong.
+    </p>
+
+    <h2>Media</h2>
+    <p><a href="mailto:info@apia.org.au">info@apia.org.au</a></p>
+
+    <p class="note">We aim to respond within a few working days.</p>
+
+    <h2>Who you are writing to</h2>
+    <dl class="facts">
+      {identity.map(([k, v]) => (
+        <div><dt>{k}</dt><dd>{v}</dd></div>
+      ))}
+    </dl>
+    <p class="note">
+      APIA’s legal status, governance and funding are set out in full on the
+      {" "}<a href="/governance/">Governance page</a>.
+    </p>
+  </section>
+</Base>
+
+<style>
+  h2 { margin-top: 2rem; font-size: 1rem; }
+  .note { font-size: 0.9375rem; color: var(--ink-muted); }
+</style>
